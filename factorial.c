@@ -11,20 +11,18 @@ void cal(int num, int* pNow, int* c)
   sum=*pNow * num + *c;
   one=sum%10;
   ten=(int)(sum/10);
-
-  //printf("num:%d sum:%d c:%d one:%d ten:%d\n",num,sum,*c, one, ten);
-
   *pNow=one;
   *c=ten;
 }
 
 void show(int* array, int position)
 {
-    int i;
-    for(i=position;i>=0;i--)
+  int i;
+  for(i=position;i>=0;i--)
     {
         printf("%d",*(array+i));
     }
+  printf("\n");
 }
 
 int main(int argc, char *argv[])
@@ -46,23 +44,20 @@ int main(int argc, char *argv[])
     {
       p=0;
       c=0;
-      while(p<=position)		//not sure
+      while(p<=position)
 	{
 	  cal(i,&a[p],&c);
 	  p++;
 	}
 
-      //if(a[position+1]!=0) position++;
-      position=p;
       while(c!=0)
 	{
-	  a[position++]=(int)(c%10);
+	  a[++position]=(int)(c%10);
 	  c/=10;
 	}
     }
 
-    show(a,position-3);
-    free(a);
+    show(a,position);
 
   return 0;
 }
