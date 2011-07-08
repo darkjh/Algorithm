@@ -5,13 +5,17 @@ int max=5000;
 
 void cal(int num, int* pNow, int* c)
 {
-  int sum;
+  int multiplier;
   int ten,one;
 
-  sum=*pNow * num + *c;
-  one=sum%10;
-  ten=(int)(sum/10);
+  //calculate multiplier then parse it into two parts
+  multiplier=*pNow * num + *c;
+  one=multiplier%10;
+  ten=(int)(multiplier/10);
+
+  //set the one-digit part to the active array case
   *pNow=one;
+  //then set the rest of the multiplier to carry
   *c=ten;
 }
 
@@ -40,16 +44,21 @@ int main(int argc, char *argv[])
   }while(limit<=0);
 
   a[0]=1;
+
+  //main loop
   for(i=1;i<=limit;i++)
     {
       p=0;
       c=0;
+      //multiply with every member in the array, which represents result of faltorial precedent, (n-1)!
       while(p<=position)
 	{
 	  cal(i,&a[p],&c);
+	  //move to another array member
 	  p++;
 	}
 
+      //after one round, if the carry is not 0, then put it in higher positions
       while(c!=0)
 	{
 	  a[++position]=(int)(c%10);
