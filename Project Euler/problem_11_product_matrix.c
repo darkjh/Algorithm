@@ -42,7 +42,7 @@ int cal_matrix(int startX, int startY)
   temp=1;
   i=startX+3;
   j=startY;
-  while(j<j+4)
+  while(j<startY+4)
     {
       temp*=matrix[i][j];
       i--;
