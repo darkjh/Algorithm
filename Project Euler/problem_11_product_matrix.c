@@ -33,9 +33,7 @@ int cal_matrix(int startX, int startY)
   j=startY;
   while(i<startX+4)
     {
-      temp*=matrix[i][j];
-      i++;
-      j++;
+      temp*=matrix[i++][j++];
     }
   if(temp>product)
     product=temp;
@@ -44,9 +42,7 @@ int cal_matrix(int startX, int startY)
   j=startY;
   while(j<startY+4)
     {
-      temp*=matrix[i][j];
-      i--;
-      j++;
+      temp*=matrix[i++][j++];
     }
   if(temp>product)
     product=temp;
@@ -86,6 +82,6 @@ int main(int argc, char *argv[])
 	  product=tmp;
       }
 
-
-  return product;;
+  printf("Result: %d\n",product);
+  return 0;
 }

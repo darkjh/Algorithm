@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+
 int max=5000;
 
 void cal(int num, int* pNow, int* c)
@@ -67,6 +69,7 @@ int main(int argc, char *argv[])
     }
 
     show(a,position);
+
 
   return 0;
 }
