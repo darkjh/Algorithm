@@ -68,8 +68,8 @@ int main(int argc, char *argv[])
 	}
     }
 
-    show(a,position);
-
+  show(a,position);
 
   return 0;
 }
+

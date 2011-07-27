@@ -18,33 +18,29 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 
 int main(int argc, char *argv[])
 {
-  long long int term;
-  int num;
-  int num_max;
-  int position;
-  int i;
+    long long int term;
+    int num;
+    int num_max;
+    int position;
+    int i;
 
-  num_max=0;
-  for (i = 500001;i <= 1000000; i+=2)
-    {
-      term=i;
-      num=0;
-      while(term!=1)
-	{
-	  if(term%2==0)
-	    term/=2;
-	  else
-	    term=3*term+1;
-	  num++;
+    num_max = 0;
+    for (i = 500001; i <= 1000000; i += 2) {
+	term = i;
+	num = 0;
+	while (term != 1) {
+	    if (term % 2 == 0)
+		term /= 2;
+	    else
+		term = 3 * term + 1;
+	    num++;
 	}
-      if(num>num_max)
-	{
-	  num_max=num;
-	  position=i;
+	if (num > num_max) {
+	    num_max = num;
+	    position = i;
 	}
     }
 
-  printf ("%d %d\n", position, num_max);
-  return 0;
+    printf("%d %d\n", position, num_max);
+    return 0;
 }
-
