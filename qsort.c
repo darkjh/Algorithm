@@ -9,6 +9,8 @@ void swap(int *a, int *b)
     *b = tmp;
 }
 
+void iswap(int )
+
 
 int partition(int A[], int p, int r)
 {
@@ -42,6 +44,14 @@ void printlist(int list[], int n)
     for (i = 0; i < n; i++)
 	printf("%d ", list[i]);
     printf("\n");
+}
+
+void iisort(int* list, int* num)
+{
+  int i, j;
+  for (i = 1; i < n; i++)
+    for (j = i; j > 0 && a[j-1] > a[j]; j--)
+      iswap(j, j-1, a);
 }
 
 int main(int argc, char *argv[])

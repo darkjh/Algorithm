@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     }
     max = i;
 
-    qsort(array, max, sizeof(char *), compare);
+    quicksort(array, max, sizeof(char *), compare);
 
     for (i = 0; i < max; i++)
 	sum += (i + 1) * give_score(array[i]);
