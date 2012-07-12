@@ -12,13 +12,13 @@ int MAX_BIT = 1000;
 void cal(int *res, int *adder, int *pos)
 {
     int c, i, tmp;
-    for (i = c = 0; i < *pos; i++) {
+    for (i = c = 0; i < *pos; i++) { /* calculation with every digit */
 	tmp = res[i] + adder[i] + c;
 	res[i] = tmp % 10;
 	c = (int) (tmp / 10);
     }
-    while (c != 0) {
-	res[(*pos)++] = c % 10;
+    while (c != 0) {		/* if c is not zero means that the result */
+	res[(*pos)++] = c % 10;	/* has more digits  */
 	c /= 10;
     }
 }
@@ -39,14 +39,11 @@ int main(int argc, char *argv[])
     count = 2;
     while (position < 1000) {
 	cal(f1, f2, &position);
-	/* tmp=f1; */
-	/* f1=f2; */
-	/* f2=tmp; */
 	swap(f1, f2);
 	count++;
     }
 
-    printf("%d\n", count);
+    printf("res: %d\n", count);
 
     return 0;
 }

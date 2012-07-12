@@ -2,36 +2,35 @@
 
 void print(const int *v, const int size)
 {
-  if (v != 0) {
-    for (int i = 0; i < size; i++) {
-      printf("%4d", v[i] );
+    if (v != 0) {
+	for (int i = 0; i < size; i++) {
+	    printf("%4d", v[i]);
+	}
+	printf("\n");
     }
-    printf("\n");
-  }
-} // print
+}				// print
 
 
 void permute(int *v, const int start, const int n)
 {
-  if (start == n-1) {
-    print(v, n);
-  }
-  else {
-    for (int i = start; i < n; i++) {
-      int tmp = v[i];
+    if (start == n - 1) {
+	print(v, n);
+    } else {
+	for (int i = start; i < n; i++) {
+	    int tmp = v[i];
 
-      v[i] = v[start];
-      v[start] = tmp;
-      permute(v, start+1, n);
-      v[start] = v[i];
-      v[i] = tmp;
+	    v[i] = v[start];
+	    v[start] = tmp;
+	    permute(v, start + 1, n);
+	    v[start] = v[i];
+	    v[i] = tmp;
+	}
     }
-  }
 }
 
 
 void main()
 {
-  int v[] = {1, 2, 3, 4};
-  permute(v, 0, sizeof(v)/sizeof(int));
+    int v[] = { 1, 2, 3, 4 };
+    permute(v, 0, sizeof(v) / sizeof(int));
 }
