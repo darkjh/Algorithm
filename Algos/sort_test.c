@@ -3,12 +3,10 @@
 #include "insertion_sort.h"
 #include "merge_sort.h"
 #include "bubble_sort.h"
+#include "quicksort.h"
 
 #define SIZE 20
 
-/* Sorting Functions */
-void merge_sort(int *a, int p, int r);
-int issort(void *data, int size, int esize, int (*compare)(const void *key1, const void *key2));
 
 /* Compare Function */
 int compare(const void *key1, const void *key2) {
@@ -61,7 +59,7 @@ void printArray(int *a, int n)
 
 int main(void)
 {
-    int i, j;
+    int j;
     int array[SIZE];
 
     for (j = 0; j < SIZE; j++) {
@@ -71,8 +69,9 @@ int main(void)
     printArray(array, SIZE);
 
     /* Call of sorting functions here */
-    if(issort((void*)array, SIZE, sizeof(int), compare) != 0)
-      return 1;
+    //issort(array, SIZE, sizeof(int), compare);
+
+    quicksort(array, SIZE, sizeof(int), compare);
     //merge_sort(array, 0, 11);
     //bubble_sort(array, SIZE);
 

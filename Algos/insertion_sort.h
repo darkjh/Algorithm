@@ -10,7 +10,7 @@
 */
 
 /* Main routine */
-int issort(void *data, int size, int esize,
+int issort(void *data, unsigned size, unsigned esize,
 	   int (*compare)(const void *key1, const void *key2)) {
 
   char *a = data;
