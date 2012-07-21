@@ -1,14 +1,25 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
 #include "insertion_sort.h"
 #include "merge_sort.h"
+#include "bubble_sort.h"
 
 #define SIZE 20
 
 /* Sorting Functions */
 void merge_sort(int *a, int p, int r);
-void insertion_sort(int *a, int n);
+int issort(void *data, int size, int esize, int (*compare)(const void *key1, const void *key2));
+
+/* Compare Function */
+int compare(const void *key1, const void *key2) {
+  if(*(int*)key1 > *(int*)key2)
+    return 1;
+  else if(*(int*)key1 == *(int*)key2)
+    return 0;
+  else
+    return -1;
+}
+
 
 /* Random Number Generation Function */
 int getRand(int min, int max)
@@ -60,9 +71,13 @@ int main(void)
     printArray(array, SIZE);
 
     /* Call of sorting functions here */
-    //insertion_sort(array, SIZE);
-    merge_sort(array, 0, 11);
+    if(issort((void*)array, SIZE, sizeof(int), compare) != 0)
+      return 1;
+    //merge_sort(array, 0, 11);
+    //bubble_sort(array, SIZE);
 
     /* Print sorted array */
     printArray(array, SIZE);
+
+    return 0;
 }
