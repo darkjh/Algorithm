@@ -72,8 +72,10 @@ int main(void)
     //issort(array, SIZE, sizeof(int), compare);
 
     //quicksort(array, SIZE, sizeof(int), compare);
-    merge_sort(array, sizeof(int), 0, 19, compare);
-    //bubble_sort(array, SIZE);
+
+    //merge_sort(array, sizeof(int), 0, 19, compare);
+
+    bubble_sort(array, SIZE, sizeof(int), compare);
 
     /* Print sorted array */
     printArray(array, SIZE);
