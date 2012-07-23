@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <time.h>
+
 #include "insertion_sort.h"
 #include "merge_sort.h"
 #include "bubble_sort.h"
 #include "quicksort.h"
+#include "counting_sort.h"
 
 #define SIZE 20
+#define MAX 1000
 
 
 /* Compare Function */
@@ -63,7 +66,7 @@ int main(void)
     int array[SIZE];
 
     for (j = 0; j < SIZE; j++) {
-	array[j] = getRand(0, 1000);
+	array[j] = getRand(0, MAX);
     }
     /* Print un-sorted array */
     printArray(array, SIZE);
@@ -75,7 +78,9 @@ int main(void)
 
     //merge_sort(array, sizeof(int), 0, 19, compare);
 
-    bubble_sort(array, SIZE, sizeof(int), compare);
+    // bubble_sort(array, SIZE, sizeof(int), compare);
+
+    counting_sort(array, SIZE, MAX);
 
     /* Print sorted array */
     printArray(array, SIZE);
