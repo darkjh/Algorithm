@@ -1,4 +1,4 @@
-/* Quicksort Algo. (randomized) */
+p/* Quicksort Algo. (randomized) */
 
 #include <stdio.h>
 #include <stdlib.h>

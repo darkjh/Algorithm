@@ -71,8 +71,8 @@ int main(void)
     /* Call of sorting functions here */
     //issort(array, SIZE, sizeof(int), compare);
 
-    quicksort(array, SIZE, sizeof(int), compare);
-    //merge_sort(array, 0, 11);
+    //quicksort(array, SIZE, sizeof(int), compare);
+    merge_sort(array, sizeof(int), 0, 19, compare);
     //bubble_sort(array, SIZE);
 
     /* Print sorted array */

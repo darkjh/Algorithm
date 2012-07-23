@@ -1,4 +1,5 @@
 /* Simple Insertion Sort Algo. */
+/* Complexity O(n^2) */
 
 #include <stdlib.h>
 #include <string.h>
