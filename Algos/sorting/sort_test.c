@@ -46,7 +46,7 @@ int getRand(int min, int max)
      */
     rc = (rand() % (max - min + 1) + min);
 
-    return (rc);
+    return rc;
 }
 
 /* Printing Array Help Function */
@@ -78,7 +78,7 @@ int main(void)
 
     //merge_sort(array, sizeof(int), 0, 19, compare);
 
-    // bubble_sort(array, SIZE, sizeof(int), compare);
+    //bubble_sort(array, SIZE, sizeof(int), compare);
 
     counting_sort(array, SIZE, MAX);
 
