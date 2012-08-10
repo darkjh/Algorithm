@@ -19,7 +19,6 @@ typedef struct {
   sl_node *bottom;
 } sl_head;
 
-
 /* search */
 /* returns a pointer to the node containing the key */
 sl_node *find(const sl_head *list, const int key) {
@@ -76,13 +75,6 @@ int getRand(int min, int max)
     return rc;
 }
 
-/* helper func for initialising a node */
-void init_node(sl_node *p, int k, int h) {
-  p->next = p->down = NULL;
-  p->data = k;
-  p->height = h;
-}
-
 /* constructor for sl_node */
 sl_node *new_node(int k, int h, sl_node *n, sl_node *d) {
 
@@ -96,6 +88,7 @@ sl_node *new_node(int k, int h, sl_node *n, sl_node *d) {
 }
 
 /* insert into a skip list */
+/* bottom up approach */
 int insert(sl_head *list, int key) {
 
   sl_node *path[list->height + 1];
@@ -103,50 +96,37 @@ int insert(sl_head *list, int key) {
   sl_node *down = NULL;
   int i = 0;
 
-  /* try to find the key */
-  /* also note the path */
-  while(p->down != NULL) {
+  while(p != NULL) {
     while(p->next != NULL && key > p->next->data)
       p = p->next;
+    if(p->next != NULL && key == p->next->data)
+      return 1;
     path[p->height] = p;
     p = p->down;
   }
-  while(p->next != NULL && key >= p->next->data)
-    p = p->next;
 
-  /* if found, then do nothing */
-  if(p->data == key) return 1;
-  /* not found, then insert */
-  else {
-    path[p->height] = p;	/* right position to insert in base list */
-    do {
-      /* if it's a new height */
-      if(i > list->height) {
-	sl_node *sentinel = (sl_node*)malloc(sizeof(sl_node));
-	init_node(sentinel, -1, i);
-	sentinel->down = list->head;
-	list->head = sentinel;
-	p = sentinel;
-      }
-      sl_node *in = (sl_node*)malloc(sizeof(sl_node));
-      init_node(in, key, i);
-      i++;
+  /* insert from the base level */
+  p = path[0];
+  do {
+    /* if it's a new height, create a sentinel node */
+    if(i > list->height)
+      p = list->head = new_node(-1, i, NULL, list->head);
 
-      in->next = p->next;
-      p->next = in;
+    /* insertion */
+    p->next = new_node(key, i++, p->next, NULL);
 
-      if(down != NULL)
-	in->down = down;
-      down = in;
+    if(down != NULL)
+      p->next->down = down;
+    down = p->next;
 
-      if(i <= list->height) p = path[i];
-    } while(getRand(0, 2) > 1);
+    if(i <= list->height)
+      p = path[i];
+  } while(getRand(0, 2) > 1);
 
-    /* update the list height */
-    list->height = list->head->height;
+  /* update the list height */
+  list->height = list->head->height;
 
-    return 0;
-  }
+  return 0;
 }
 
 /* delete the node containing key */
@@ -175,6 +155,8 @@ int delete(sl_head* list, int key) {
   return 0;
 }
 
+/* print */
+/* print a skip list with all its levels */
 void print_list(const sl_head *list) {
 
   sl_node *p = list->head;
@@ -232,8 +214,6 @@ int main(int argc, char *argv[])
     for(i = 0; i < 20; i++)
       insert(list, getRand(0, 1000));
 
-    if((find(list, 1)) != NULL) printf("found\n");
-    else printf("not found\n");
     print_list(list);
   }
 
