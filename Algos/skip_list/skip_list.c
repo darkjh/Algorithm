@@ -39,6 +39,28 @@ sl_node *find(const sl_head *list, const int key) {
   return key == p->data ? p : NULL;
 }
 
+/* a better search func */
+sl_node *find1(const sl_head *list, const int key) {
+
+  sl_node *p = list->head;
+
+  while(p != NULL) {
+    while(p->next != NULL && key > p->next->data)
+      p = p->next;
+
+    /* if the node is found */
+    if(p->next != NULL && key == p->next->data) {
+      p = p->next;
+      /* get down to base level */
+      while(p->down != NULL)
+	p = p->down;
+      return p;
+    }
+    p = p->down;
+  }
+  return NULL;
+}
+
 /* flip a coin */
 int getRand(int min, int max)
 {
@@ -61,26 +83,44 @@ void init_node(sl_node *p, int k, int h) {
   p->height = h;
 }
 
+/* constructor for sl_node */
+sl_node *new_node(int k, int h, sl_node *n, sl_node *d) {
+
+  sl_node *p = (sl_node*)malloc(sizeof(sl_node));
+  p->data = k;
+  p->height = h;
+  p->next = n;
+  p->down = d;
+
+  return p;
+}
+
 /* insert into a skip list */
 int insert(sl_head *list, int key) {
 
-  if(find(list, key) != NULL) return 0;
-  else {
-    sl_node *path[list->height + 1];
-    sl_node *p = list->head;
-    sl_node *down = NULL;
-    int i = 0;
+  sl_node *path[list->height + 1];
+  sl_node *p = list->head;
+  sl_node *down = NULL;
+  int i = 0;
 
-    while(p->down != NULL) {
-      while(p->next != NULL && key > p->next->data)
-	p = p->next;
-      path[p->height] = p;
-      p = p->down;
-    }
+  /* try to find the key */
+  /* also note the path */
+  while(p->down != NULL) {
     while(p->next != NULL && key > p->next->data)
       p = p->next;
+    path[p->height] = p;
+    p = p->down;
+  }
+  while(p->next != NULL && key >= p->next->data)
+    p = p->next;
 
+  /* if found, then do nothing */
+  if(p->data == key) return 1;
+  /* not found, then insert */
+  else {
+    path[p->height] = p;	/* right position to insert in base list */
     do {
+      /* if it's a new height */
       if(i > list->height) {
 	sl_node *sentinel = (sl_node*)malloc(sizeof(sl_node));
 	init_node(sentinel, -1, i);
@@ -101,13 +141,41 @@ int insert(sl_head *list, int key) {
 
       if(i <= list->height) p = path[i];
     } while(getRand(0, 2) > 1);
+
+    /* update the list height */
     list->height = list->head->height;
 
-    return 1;
+    return 0;
   }
 }
 
-void print_list(sl_head *list) {
+/* delete the node containing key */
+/* up down approach */
+int delete(sl_head* list, int key) {
+
+  sl_node *p = list->head;
+  sl_node *to_delete = NULL;
+
+  while(p != NULL) {
+    /* go 'right' */
+    while(p->next != NULL && key > p->next->data)
+      p = p->next;
+
+    /* if the next one is the node, delete it */
+    if(p->next != NULL && p->next->data == key) {
+      to_delete = p->next;
+      p->next = p->next->next;
+      free(to_delete);
+    }
+
+    /* continue to next level */
+    p = p->down;
+  }
+
+  return 0;
+}
+
+void print_list(const sl_head *list) {
 
   sl_node *p = list->head;
   do{
