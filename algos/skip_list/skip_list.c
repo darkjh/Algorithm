@@ -126,6 +126,13 @@ int insert(sl_head *list, int key) {
   /* update the list height */
   list->height = list->head->height;
 
+  /* direct link to the base list */
+  if(list->bottom == NULL) {
+    list->bottom = list->head;
+    while(list->bottom->down != NULL)
+      list->bottom = list->bottom->down;
+  }
+
   return 0;
 }
 

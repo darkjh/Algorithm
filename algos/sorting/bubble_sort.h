@@ -10,7 +10,9 @@
    0 if sorting is successful, or –1 otherwise.
 */
 
-int bubble_sort(void *data, int size, int esize,
+int bubble_sort(void *data,
+		int size,
+		int esize,
 		int (*compare)(const void *, const void *)) {
 
   char *a = data, *m;

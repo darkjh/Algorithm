@@ -1,14 +1,11 @@
-/* Quicksort Algo. (randomized) */
+/* Quicksort Algo. (randomized)
+   Complexity O(nlgn)
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-/*
-  Interface
-  int issort(void *data, int size, int esize, int (*compare)(const void *key1, const void *key2));
-  Return Value: 0 if sorting is successful, or –1 otherwise.
-*/
 
 void swap(char *a, char *b, unsigned size)
 {
@@ -19,8 +16,11 @@ void swap(char *a, char *b, unsigned size)
     } while (--size > 0);
 }
 
-int partition(void *data, unsigned size, unsigned esize,
-	      int (*compare) (const void *, const void *)) {
+int
+partition(void *data,
+	  unsigned size,
+	  unsigned esize,
+	  int (*compare) (const void *, const void *)) {
 
   void *pi, *pj, *pn;
 
@@ -45,10 +45,21 @@ int partition(void *data, unsigned size, unsigned esize,
   return (pj - data) / esize;
 }
 
+/* main function
+   param:
+     - input data to sort
+     - size of input data
+     - size of a sinlge element
+     - compare function
+   return Value:
+     - 0 if sorting is successful
+     - –1 otherwise.
+*/
 void
 quicksort(void *data,
 	  unsigned size,
-	  unsigned esize, int (*compare) (const void *, const void *))
+	  unsigned esize,
+	  int (*compare) (const void *, const void *))
 {
   /* base case */
   if (size <= 1)

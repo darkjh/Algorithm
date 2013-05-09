@@ -6,28 +6,36 @@
 
 /*
   Interface
-  int issort(void *data, int size, int esize, int (*compare)(const void *key1, const void *key2));
-  Return Value: 0 if sorting is successful, or –1 otherwise.
+  Param:
+    - input data to sort
+    - size of input
+    - size of a single element
+    - compare function
+  Return Value:
+    - 0 if sorting is successful
+    - –1 otherwise.
 */
 
-/* Main routine */
-int issort(void *data, unsigned size, unsigned esize,
-	   int (*compare)(const void *key1, const void *key2)) {
+/* main routine */
+int issort(void *data,
+	   unsigned size,
+	   unsigned esize,
+	   int (*compare)(const void *, const void *)) {
 
   char *a = data;
   void *key;
   int i, j;
 
-  /* Allocate storage for key */
+  /* allocate storage for key */
   if((key = (char *)malloc(esize)) == NULL)
     return -1;
 
-  /* Main loop */
+  /* main loop */
   for(j = 1; j < size; j++) {
     memcpy(key, &a[j * esize], esize);
     i = j - 1;
 
-    /* Seach for the position to insert key */
+    /* seach for the position to insert key */
     while(i >= 0 && compare(&a[i * esize], key) > 0) {
       memcpy(&a[(i + 1) * esize], &a[i * esize], esize);
       i--;
