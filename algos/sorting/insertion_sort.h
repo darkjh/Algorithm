@@ -17,10 +17,10 @@
 */
 
 /* main routine */
-int issort(void *data,
-	   unsigned size,
-	   unsigned esize,
-	   int (*compare)(const void *, const void *)) {
+int insertion_sort(void *data,
+		   unsigned size,
+		   unsigned esize,
+		   int (*compare)(const void *, const void *)) {
 
   char *a = data;
   void *key;

@@ -6,8 +6,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-
-void swap(char *a, char *b, unsigned size)
+void
+swap(char *a, char *b, unsigned size)
 {
     do {
 	char tmp = *a;
