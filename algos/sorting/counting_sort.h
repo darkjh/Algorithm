@@ -1,7 +1,10 @@
-/* Simple Counting Sort Algo. */
-/* Complexity O(n) with assumption that the elements are bounded by k*/
-/* k ~ O(n) */
-/* for integer sorting only */
+/*
+  Simple Counting Sort Algo.
+  Complexity O(n) with assumption that the elements are bounded by k
+  k ~ O(n)
+
+  This code works only for integers
+*/
 
 #include <stdlib.h>
 #include <string.h>

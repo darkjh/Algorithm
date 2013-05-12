@@ -1,13 +1,21 @@
-/* Simple Heap Sort Algo. */
-/* Complexity O(nlgn) */
+/*
+  Simple Heap Sort Algo.
+  Complexity O(nlgn)
+
+  Sorting algorithm backed by a max heap data structure, not
+  stable. It's slower than quicksort in practice because of data
+  locality.
+ */
 
 #include <stdio.h>
 
+/* get left child index in a binary heap */
 inline int
 left_child(int i) {
   return 2 * i;
 }
 
+/* swap two elements of given size */
 inline void
 swap(void *this, void *that, int esize) {
   void *tmp = (void *)malloc(esize);
@@ -17,6 +25,8 @@ swap(void *this, void *that, int esize) {
   free(tmp);
 }
 
+/* adjust an element in the max heap to satisfy the max heap
+   property */
 void
 adjust_down(void *data,
 	    int esize,
@@ -44,7 +54,7 @@ adjust_down(void *data,
   }
 }
 
-int
+void
 heap_sort(void *data,
 	 int size,
 	 int esize,

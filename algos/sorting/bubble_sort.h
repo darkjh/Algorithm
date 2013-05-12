@@ -1,5 +1,9 @@
-/* Bubble Sort Algo.
-   Complexity O(n^2) */
+/*
+  Bubble Sort Algo.
+  Complexity O(n^2)
+
+  Simple algorithm for sorting
+ */
 
 #include <stdlib.h>
 

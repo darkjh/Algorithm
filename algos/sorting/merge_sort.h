@@ -1,5 +1,10 @@
-/* Merge Sort Algo.
-   Complexity O(nlogn)*/
+/*
+  Merge Sort Algo.
+  Complexity O(nlogn)
+
+  Sorting algorithm based on divide and conquer. Merge sort is stable
+  but needs extra memory (not in-place).
+ */
 
 #include <stdlib.h>
 

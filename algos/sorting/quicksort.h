@@ -1,5 +1,8 @@
-/* Quicksort Algo. (randomized)
-   Complexity O(nlgn)
+/*
+  Quicksort Algo. (randomized)
+  Complexity O(nlgn)
+
+  Very popular and efficient sorting algorithm.
  */
 
 #include <stdio.h>
@@ -20,7 +23,7 @@ int
 partition(void *data,
 	  unsigned size,
 	  unsigned esize,
-	  int (*compare) (const void *, const void *)) {
+	  int (*comp) (const void *, const void *)) {
 
   void *pi, *pj, *pn;
 
@@ -33,10 +36,10 @@ partition(void *data,
   for (;;) {
     do
       pi += esize;
-    while (pi < pn && compare(pi, data) < 0);
+    while (pi < pn && comp(pi, data) < 0);
     do
       pj -= esize;
-    while (compare(pj, data) > 0);
+    while (comp(pj, data) > 0);
     if (pj < pi)
       break;
     swap(pi, pj, esize);
@@ -59,14 +62,14 @@ void
 quicksort(void *data,
 	  unsigned size,
 	  unsigned esize,
-	  int (*compare) (const void *, const void *))
+	  int (*comp) (const void *, const void *))
 {
   /* base case */
   if (size <= 1)
     return;
 
   int q;
-  q = partition(data, size, esize, compare);
-  quicksort(data, q, esize, compare);
-  quicksort(data + (q + 1) * esize, size - q - 1, esize, compare);
+  q = partition(data, size, esize, comp);
+  quicksort(data, q, esize, comp);
+  quicksort(data + (q + 1) * esize, size - q - 1, esize, comp);
 }

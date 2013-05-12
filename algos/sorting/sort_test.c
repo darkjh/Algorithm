@@ -1,3 +1,8 @@
+/*
+  A driver for demonstrating sorting algorithms. It generates random
+  numbers then run sorting functions on it.
+ */
+
 #include <stdio.h>
 #include <time.h>
 
@@ -7,6 +12,7 @@
 // #include "quicksort.h"
 #include "counting_sort.h"
 #include "heap_sort.h"
+#include "radix_sort.h"
 
 #define SIZE 20
 #define MAX 1000
@@ -80,7 +86,9 @@ int main(void)
 
     //counting_sort(array, SIZE, MAX);
 
-    heap_sort(array, SIZE, sizeof(int), compare);
+    //heap_sort(array, SIZE, sizeof(int), compare);
+
+    radix_sort(array, SIZE);
 
     /* Print sorted array */
     printArray(array, SIZE);

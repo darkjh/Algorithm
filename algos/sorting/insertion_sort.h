@@ -1,5 +1,10 @@
-/* Simple Insertion Sort Algo. */
-/* Complexity O(n^2) */
+/*
+  Simple Insertion Sort Algo.
+  Complexity O(n^2)
+
+  Simple sorting algorithm, can accelerate to O(n) when input is
+  already sorted or nearly sorted.
+ */
 
 #include <stdlib.h>
 #include <string.h>
@@ -15,12 +20,11 @@
     - 0 if sorting is successful
     - –1 otherwise.
 */
-
-/* main routine */
-int insertion_sort(void *data,
-		   unsigned size,
-		   unsigned esize,
-		   int (*compare)(const void *, const void *)) {
+int
+insertion_sort(void *data,
+	       unsigned size,
+	       unsigned esize,
+	       int (*comp)(const void *, const void *)) {
 
   char *a = data;
   void *key;
@@ -36,7 +40,7 @@ int insertion_sort(void *data,
     i = j - 1;
 
     /* seach for the position to insert key */
-    while(i >= 0 && compare(&a[i * esize], key) > 0) {
+    while(i >= 0 && comp(&a[i * esize], key) > 0) {
       memcpy(&a[(i + 1) * esize], &a[i * esize], esize);
       i--;
     }
